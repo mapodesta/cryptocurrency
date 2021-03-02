@@ -11,31 +11,31 @@ const Label = styled.label`
   display: block;
 `;
 
-const Select =styled.select`
-width:100%;
-display:block;
-padding:1rem;
--webkit-appearance:none;
-border-radius:10px;
-border:none;
-font-size:1.2rem;
+const Select = styled.select`
+  width: 100%;
+  display: block;
+  padding: 1rem;
+  -webkit-appearance: none;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
 `;
 
 const useCriptomoneda = (label, options) => {
-  //state del hook
-  console.log("DATA",options)
-
   const [state, actualizarState] = useState("");
 
   const SelectCripto = () => (
     <Fragment>
       <Label>{label}</Label>
       <Select onChange={(e) => actualizarState(e.target.value)} value={state}>
-        {options && options.length && options.map((opc) => (
-          <option key={opc.CoinInfo.Id} value={opc.CoinInfo.Name}>
-            {opc.CoinInfo.FullName}
-          </option>
-        ))}
+        <option value="">Seleccione una Criptomoneda</option>
+        {options &&
+          options.length &&
+          options.map((opc) => (
+            <option key={opc.CoinInfo.Id} value={opc.CoinInfo.Name}>
+              {opc.CoinInfo.FullName}
+            </option>
+          ))}
       </Select>
     </Fragment>
   );

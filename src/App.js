@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import imagen from "../src/cryptomonedas.png";
 import styled from "@emotion/styled";
-import Formulario from "../src/components/Formulario"
+import Formulario from "../src/components/Formulario";
 
 const Contenedor = styled.div`
   max-width: 900px;
@@ -19,23 +19,31 @@ const Imagen = styled.img`
 `;
 
 const Heading = styled.h1`
-font-family : 'Bebas Neue',cursive;
-color:#FFF;
-text-align:left;
-font-size:50px;
-margin-bottom:50px;
-margin-top:80px;
+  font-family: "Bebas Neue", cursive;
+  color: #fff;
+  text-align: left;
+  font-size: 50px;
+  margin-bottom: 50px;
+  margin-top: 80px;
 
-&::after{
-  content:'';
-  width:100px;
-  height:6px;
-  background-color:#66A2FE;
-  display:block
-}
+  &::after {
+    content: "";
+    width: 100px;
+    height: 6px;
+    background-color: #66a2fe;
+    display: block;
+  }
 `;
 
 function App() {
+  const [moneda, guardarMoneda] = useState("");
+  const [criptomoneda, guardarCriptomoneda] = useState("");
+
+  useEffect(() => {
+    if(moneda === '')return;
+    console.log("cotizando....")
+  
+  }, [moneda,criptomoneda])
   return (
     <Contenedor>
       <div>
@@ -43,7 +51,10 @@ function App() {
       </div>
       <div>
         <Heading>Cotiza Criptomonedas al Instante</Heading>
-        <Formulario/>
+        <Formulario
+          guardarCriptomoneda={guardarCriptomoneda}
+          guardarMoneda={guardarMoneda}
+        />
       </div>
     </Contenedor>
   );

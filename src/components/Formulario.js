@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import useMoneda from "../hooks/useMoneda";
 import useCriptomoneda from "../hooks/useCriptomoneda";
 import axios from "axios";
+import Error from "../components/Error"
 
 const Boton = styled.input`
   margin-top: 20px;
@@ -21,7 +22,10 @@ const Boton = styled.input`
     cursor: pointer;
   }
 `;
-const Formulario = () => {
+const Formulario = ({guardarMoneda,guardarCriptomoneda}) => {
+
+  const [error,guardarError]=useState(false)
+
   const MONEDAS = [
     { codigo: "USD", nombre: "Dolar de Estados Unidos" },
     { codigo: "MXN", nombre: "Peso Mexicano" },
@@ -48,8 +52,27 @@ const Formulario = () => {
     consultarAPI();
   }, []);
 
+  const cotizarMoneda=e =>{
+    e.preventDefault()
+
+    if(moneda === '' || criptomoneda === ''){
+      guardarError(true)
+      return
+    }else{
+
+      guardarError(false)
+      guardarMoneda(moneda)
+      guardarCriptomoneda(criptomoneda)
+
+    }
+
+  }
+
   return (
-    <form>
+    <form
+    onSubmit={cotizarMoneda}
+    >
+      {error ? <Error mensaje="Se produjo un error"/>:null}
       <SelectMonedas />
       <SelectCripto />
       <Boton type="submit" value="Calcular" />

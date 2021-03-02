@@ -30,6 +30,7 @@ const useMoneda = (label, options) => {
     <Fragment>
       <Label>{label}</Label>
       <Select onChange={(e) => actualizarState(e.target.value)} value={state}>
+      <option value="">Seleccione una Moneda</option>
         {options.map((opc) => (
           <option key={opc.codigo} value={opc.codigo}>
             {opc.nombre}
